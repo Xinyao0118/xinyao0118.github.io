@@ -51,9 +51,6 @@ plt.show()
 <img src="/img/output_2_1.png"/>
 
 
-
-
-
 ```python
 #chunk2: split train and test dataset
 def split_dataset():
