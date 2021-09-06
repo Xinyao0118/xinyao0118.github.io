@@ -3,7 +3,7 @@ layout:     post
 title:      Identify Fraudulent activities 	
 subtitle:   H2O_cluster, confusion matrix
 date:       2021-04-28 	
-author:     (Mia) Xinyao Wu 
+author:     (Mia) Xinyao Wu
 header-img: img/post-bg-ios9-web.jpg
 catalog: true
 tags:
