@@ -401,7 +401,7 @@ suspect['transaction_dollar_amount'].sum()
 
 
 # non-parametric & parametric tests
-Aim: check whether the mean of suspect and non-suspect team is different.
+Aim: check whether the mean of suspect and non-suspect team are different.
 
 ```python
 

@@ -2,7 +2,7 @@
 layout:     post
 title:      Funds Inflow Prediction (2014) for Ants Financial Services Group(AFSG)
 subtitle:   Use ARIMA, STL to find the inflow finding trend for AFSG.
-date:       2021-03-21 	
+date:       2019-03-21 	
 author:     Xinyao Wu
 header-img: img/post-bg-ios9-web.jpg
 catalog: true
