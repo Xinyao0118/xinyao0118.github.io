@@ -377,7 +377,7 @@ ax.legend(fontsize=12)
 plt.show()
 ```
 
-
+![system schema](/img/output_13_0.png)
 <img src="/img/output_13_0.png"/>
 
 
