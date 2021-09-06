@@ -300,6 +300,7 @@ plt.show()
 
 ```python
 ## check the distribution of x3d labels
+
 x3d.label.value_counts()
 ```
 
@@ -318,22 +319,24 @@ x3d.label.value_counts()
 
 
 ```python
-### looks like label 5 is fraud
 
-suspicious_label=5
 
-suspect = credit_df.loc[x3d.label ==5]
+suspicious_label=4
+
+suspect = credit_df.loc[x3d.label ==4]
 
 suspect.to_csv('./suspect',index = False)
 
 cols = ["transaction_dollar_amount",'75%']
 plt.hist(suspect.loc[:,cols].values,bins=50,label=cols)
 plt.legend(loc='best')
+plt.show()
 
 unsuspect = credit_df.loc[x3d.label !=3]
 
 plt.hist(suspect.loc[:,['distance']].values,bins=50,density = True,label = 'suspect')
 plt.hist(unsuspect.loc[:,['distance']].values,bins=50,density = True,label = 'unsuspect')
+plt.legend(loc='best')
 plt.show()
 
 ### deleting 0 distance and replot
@@ -342,6 +345,7 @@ unsuspect = unsuspect.loc[unsuspect.distance>100]
 
 plt.hist(suspect.loc[:,['distance']].values,bins=50,density = True,label = 'suspect')
 plt.hist(unsuspect.loc[:,['distance']].values,bins=50,density = True,label = 'unsuspect')
+plt.legend(loc='best')
 plt.show()
 
 ### Conclusion: Distance is the core factor for detecting the frauds.
@@ -349,7 +353,6 @@ plt.show()
 
 
 
-![png](output_7_0.png)
 <img src="/img/output_777_0.png"/>
 
 
@@ -365,7 +368,8 @@ suspect.shape[0]/credit_df.shape[0]*100
 
 
 
-    38.401767892785855
+1.8483441280703898
+
 
 
 
@@ -378,7 +382,7 @@ suspect['transaction_dollar_amount'].sum()
 
 
 
-    7011068.78
+    444493.55000000005
 
 
 
@@ -400,8 +404,8 @@ r2 = mannwhitneyu(dis_x,dis_y)
 print(r2)
 ```
 
-    (-214.12611385651115, 0.0)
-    MannwhitneyuResult(statistic=437529176.5, pvalue=0.0)
+(184.11775527497144, 0.0)
+MannwhitneyuResult(statistic=14921897.5, pvalue=0.0)
 
 
 
@@ -419,11 +423,5 @@ r2= mannwhitneyu(dis_x,dis_y)
 print(r2)
 ```
 
-    (-39.32269357448229, 0.0)
-    MannwhitneyuResult(statistic=2999978105.5, pvalue=5.025428352403337e-11)
-
-
-
-```python
-
-```
+(11.961471627328077, 5.655073132421734e-33)
+MannwhitneyuResult(statistic=137735388.0, pvalue=1.5637055034033401e-15)
