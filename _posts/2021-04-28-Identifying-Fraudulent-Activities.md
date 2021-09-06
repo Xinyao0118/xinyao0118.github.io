@@ -289,7 +289,7 @@ plt.show()
 ```
 
 
-<img src="/img/output_7_0.png" width="0" height="0" />
+<img src="/img/output_7_0.png"/>
 
 
 ```python
@@ -378,7 +378,7 @@ plt.show()
 ```
 
 
-<img src="/img/output_13_0.png" width="0" height="0" />
+<img src="/img/output_13_0.png"/>
 
 
 
