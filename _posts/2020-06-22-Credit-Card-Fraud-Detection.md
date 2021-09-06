@@ -354,11 +354,8 @@ plt.show()
 
 
 <img src="/img/output_777_0.png"/>
-
-
-
 <img src="/img/output_777_1.png"/>
-
+<img src="/img/output_7_2.png"/>
 
 ```python
 #ratio of suspectious fraud transactions
