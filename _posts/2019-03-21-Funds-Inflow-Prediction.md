@@ -217,7 +217,7 @@ autocorrelation(residual, 20)
 
 <img src="/img/output_8_1.png"/>
 
-# 7. model delection
+# 6. model delection
 
 ```python
 #chunk5: AIC, BIC for model selection
@@ -254,7 +254,7 @@ resid_fit_seq = resid_model.fittedvalues
 resid_pred_seq = resid_model.predict(start = '2014-08-01',end = '2014-08-10',dynamic = True)
 ```
 
-# 8 .  Model Fitting
+# 7 .  Model Fitting
 
 
 ```python
@@ -291,7 +291,7 @@ pred_seq = pred_seq.add(trend_pred_seq,fill_value = 0)
     <ipython-input-44-02d92dd51741>:17: FutureWarning: The pandas.datetime class is deprecated and will be removed from pandas in a future version. Import from datetime module instead.
       '2014-08-09', '2014-08-10']).apply(lambda dates: pd.datetime.strptime(dates, '%Y-%m-%d'))
 
-#9. Measure Performance
+#8. Measure Performance
 
 ```python
 #chunk5: Measure Performance
