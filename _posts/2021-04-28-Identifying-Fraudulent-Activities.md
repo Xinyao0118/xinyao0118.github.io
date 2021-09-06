@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      Identify Fraudulent activities 	
-subtitle:   H2O_cluster, confusion matrix
+subtitle:   Use Ranfom Forest to detect fraudulent activities for E-commerce websites.
 date:       2021-04-28 	
 author:     (Mia) Xinyao Wu
 header-img: img/post-bg-ios9-web.jpg
@@ -12,6 +12,8 @@ tags:
     - 函数式编程
     - 开源框架
 ---
+# Goal
+Build a machine learning model that predicts the probability that the first transaction of a new user is fraudulent.
 
 ```python
 import numpy as np
@@ -32,9 +34,8 @@ from h2o.estimators.random_forest import H2ORandomForestEstimator
 data = pd.read_csv('Fraud_Data.csv',parse_dates=['signup_time', 'purchase_time'])
 ```
 
-
+## 1. Map users' IP addresses to their countries
 ```python
-#Using geo data to map IP address to country
 
 address2country = pd.read_csv('./IpAddress_to_Country.csv')
 countries = []
@@ -170,7 +171,7 @@ data.head()
 
 
 
-
+# 2. Feature Engineering
 ```python
 #check time difference between purchase and register
 time_diff = data['purchase_time'] - data['signup_time']
@@ -198,7 +199,7 @@ columns = ['signup_day', 'signup_week', 'purchase_day', 'purchase_week', 'purcha
            'browser', 'sex', 'age', 'country', 'time_diff', 'device_num', 'ip_num', 'class']
 data = data[columns]
 ```
-
+# 3. Build Random Forest Model with H2o Frame
 
 ```python
 
@@ -277,7 +278,7 @@ model.train(x=feature, y=target, training_frame=train, validation_frame=test)
     drf Model Build progress: |███████████████████████████████████████████████| 100%
 
 
-
+# 4. Show the feature importance
 ```python
 # Feature importance
 importance = model.varimp(use_pandas=True)
@@ -288,10 +289,7 @@ plt.show()
 ```
 
 
-
-![png](./img/output_7_0.png)
-
-
+<img src="/img/output_7_0.png" width="0" height="0" />
 
 
 ```python
@@ -380,8 +378,8 @@ plt.show()
 ```
 
 
+<img src="/img/output_13_0.png" width="0" height="0" />
 
-![png](./img/output_13_0.png)
 
 
 
