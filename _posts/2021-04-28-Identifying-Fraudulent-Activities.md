@@ -199,7 +199,7 @@ columns = ['signup_day', 'signup_week', 'purchase_day', 'purchase_week', 'purcha
            'browser', 'sex', 'age', 'country', 'time_diff', 'device_num', 'ip_num', 'class']
 data = data[columns]
 ```
-# 3. Build Random Forest Model with H2o Frame
+# 3. Build Random Forest Model with H2O Frame
 
 ```python
 
