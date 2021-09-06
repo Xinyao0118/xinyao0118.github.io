@@ -14,6 +14,8 @@ tags:
 ---
 
 
+# Goal:
+Predict the trend of Funds Inflow using historical time series data.
 
 ```python
 import matplotlib.pyplot as plt
@@ -50,6 +52,7 @@ plt.show()
 
 <img src="/img/output_2_1.png"/>
 
+# 2. training, testing data preparation
 
 ```python
 #chunk2: split train and test dataset
@@ -70,10 +73,11 @@ def split_dataset():
 train_seq,test_seq = split_dataset()
 ```
 
+# 3. ADF Test
+Aim: check whether trainning timeseries is stationary
 
 ```python
-#chunk2: ADF Test
-    #Aim: check whether trainning timeseries is stationary
+#chunk2:
     #if not stationary: try lag1 series,lag2 series
     #if stationary: observe the PACF,ACF plot and select best p,q parameters for ARIMA model
 def adf_check(timeseries):
@@ -110,7 +114,7 @@ adf_check(train_seq)
 <img src="/img/output_4_1.png"/>
 
 
-
+# 3. Hyperparatemer tuning
 
 ```python
 #chunk3: Select p,q parameters by observing PACF,ACF plot
@@ -133,7 +137,7 @@ autocorrelation(seq_diff1,20)
 
 
 
-
+# 4. Seasonal and Trend decomposition using Loess(STL)
 ```python
 #chunk4: Seasonal and Trend decomposition using Loess(STL)
 def decompose(timeseries):
@@ -166,7 +170,7 @@ decompose(train_seq)
 
 <img src="/img/output_6_0.png"/>
 
-
+# 5. recheck stationary after decomposition
 ```python
 decomposition = seasonal_decompose(train_seq)
 trend = decomposition.trend
@@ -201,7 +205,6 @@ adf_check(residual)
 <img src="/img/output_7_3.png"/>
 
 
-
 ```python
 autocorrelation(trend, 20)
 autocorrelation(residual, 20)
@@ -214,7 +217,7 @@ autocorrelation(residual, 20)
 
 <img src="/img/output_8_1.png"/>
 
-
+# 7. model delection
 
 ```python
 #chunk5: AIC, BIC for model selection
@@ -227,642 +230,15 @@ print('residual AIC',resid_evaluate.aic_min_order)
 print('residual AIC',resid_evaluate.bic_min_order)
 ```
 
-    /opt/anaconda3/lib/python3.8/site-packages/statsmodels/tsa/arima_model.py:472: FutureWarning:
-    statsmodels.tsa.arima_model.ARMA and statsmodels.tsa.arima_model.ARIMA have
-    been deprecated in favor of statsmodels.tsa.arima.model.ARIMA (note the .
-    between arima and model) and
-    statsmodels.tsa.SARIMAX. These will be removed after the 0.12 release.
-
-    statsmodels.tsa.arima.model.ARIMA makes use of the statespace framework and
-    is both well tested and maintained.
-
-    To silence this warning and continue using ARMA and ARIMA until they are
-    removed, use:
-
-    import warnings
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARMA',
-                            FutureWarning)
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARIMA',
-                            FutureWarning)
-
-      warnings.warn(ARIMA_DEPRECATION_WARN, FutureWarning)
-    /opt/anaconda3/lib/python3.8/site-packages/statsmodels/tsa/arima_model.py:472: FutureWarning:
-    statsmodels.tsa.arima_model.ARMA and statsmodels.tsa.arima_model.ARIMA have
-    been deprecated in favor of statsmodels.tsa.arima.model.ARIMA (note the .
-    between arima and model) and
-    statsmodels.tsa.SARIMAX. These will be removed after the 0.12 release.
-
-    statsmodels.tsa.arima.model.ARIMA makes use of the statespace framework and
-    is both well tested and maintained.
-
-    To silence this warning and continue using ARMA and ARIMA until they are
-    removed, use:
-
-    import warnings
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARMA',
-                            FutureWarning)
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARIMA',
-                            FutureWarning)
-
-      warnings.warn(ARIMA_DEPRECATION_WARN, FutureWarning)
-    /opt/anaconda3/lib/python3.8/site-packages/statsmodels/tsa/arima_model.py:472: FutureWarning:
-    statsmodels.tsa.arima_model.ARMA and statsmodels.tsa.arima_model.ARIMA have
-    been deprecated in favor of statsmodels.tsa.arima.model.ARIMA (note the .
-    between arima and model) and
-    statsmodels.tsa.SARIMAX. These will be removed after the 0.12 release.
-
-    statsmodels.tsa.arima.model.ARIMA makes use of the statespace framework and
-    is both well tested and maintained.
-
-    To silence this warning and continue using ARMA and ARIMA until they are
-    removed, use:
-
-    import warnings
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARMA',
-                            FutureWarning)
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARIMA',
-                            FutureWarning)
-
-      warnings.warn(ARIMA_DEPRECATION_WARN, FutureWarning)
-    /opt/anaconda3/lib/python3.8/site-packages/statsmodels/tsa/arima_model.py:472: FutureWarning:
-    statsmodels.tsa.arima_model.ARMA and statsmodels.tsa.arima_model.ARIMA have
-    been deprecated in favor of statsmodels.tsa.arima.model.ARIMA (note the .
-    between arima and model) and
-    statsmodels.tsa.SARIMAX. These will be removed after the 0.12 release.
-
-    statsmodels.tsa.arima.model.ARIMA makes use of the statespace framework and
-    is both well tested and maintained.
-
-    To silence this warning and continue using ARMA and ARIMA until they are
-    removed, use:
-
-    import warnings
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARMA',
-                            FutureWarning)
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARIMA',
-                            FutureWarning)
-
-      warnings.warn(ARIMA_DEPRECATION_WARN, FutureWarning)
-    /opt/anaconda3/lib/python3.8/site-packages/statsmodels/tsa/arima_model.py:472: FutureWarning:
-    statsmodels.tsa.arima_model.ARMA and statsmodels.tsa.arima_model.ARIMA have
-    been deprecated in favor of statsmodels.tsa.arima.model.ARIMA (note the .
-    between arima and model) and
-    statsmodels.tsa.SARIMAX. These will be removed after the 0.12 release.
-
-    statsmodels.tsa.arima.model.ARIMA makes use of the statespace framework and
-    is both well tested and maintained.
-
-    To silence this warning and continue using ARMA and ARIMA until they are
-    removed, use:
-
-    import warnings
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARMA',
-                            FutureWarning)
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARIMA',
-                            FutureWarning)
-
-      warnings.warn(ARIMA_DEPRECATION_WARN, FutureWarning)
-    /opt/anaconda3/lib/python3.8/site-packages/statsmodels/base/model.py:547: HessianInversionWarning: Inverting hessian failed, no bse or cov_params available
-      warnings.warn('Inverting hessian failed, no bse or cov_params '
-    /opt/anaconda3/lib/python3.8/site-packages/statsmodels/tsa/arima_model.py:472: FutureWarning:
-    statsmodels.tsa.arima_model.ARMA and statsmodels.tsa.arima_model.ARIMA have
-    been deprecated in favor of statsmodels.tsa.arima.model.ARIMA (note the .
-    between arima and model) and
-    statsmodels.tsa.SARIMAX. These will be removed after the 0.12 release.
-
-    statsmodels.tsa.arima.model.ARIMA makes use of the statespace framework and
-    is both well tested and maintained.
-
-    To silence this warning and continue using ARMA and ARIMA until they are
-    removed, use:
-
-    import warnings
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARMA',
-                            FutureWarning)
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARIMA',
-                            FutureWarning)
-
-      warnings.warn(ARIMA_DEPRECATION_WARN, FutureWarning)
-    /opt/anaconda3/lib/python3.8/site-packages/statsmodels/tsa/arima_model.py:472: FutureWarning:
-    statsmodels.tsa.arima_model.ARMA and statsmodels.tsa.arima_model.ARIMA have
-    been deprecated in favor of statsmodels.tsa.arima.model.ARIMA (note the .
-    between arima and model) and
-    statsmodels.tsa.SARIMAX. These will be removed after the 0.12 release.
-
-    statsmodels.tsa.arima.model.ARIMA makes use of the statespace framework and
-    is both well tested and maintained.
-
-    To silence this warning and continue using ARMA and ARIMA until they are
-    removed, use:
-
-    import warnings
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARMA',
-                            FutureWarning)
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARIMA',
-                            FutureWarning)
-
-      warnings.warn(ARIMA_DEPRECATION_WARN, FutureWarning)
-    /opt/anaconda3/lib/python3.8/site-packages/statsmodels/tsa/arima_model.py:472: FutureWarning:
-    statsmodels.tsa.arima_model.ARMA and statsmodels.tsa.arima_model.ARIMA have
-    been deprecated in favor of statsmodels.tsa.arima.model.ARIMA (note the .
-    between arima and model) and
-    statsmodels.tsa.SARIMAX. These will be removed after the 0.12 release.
-
-    statsmodels.tsa.arima.model.ARIMA makes use of the statespace framework and
-    is both well tested and maintained.
-
-    To silence this warning and continue using ARMA and ARIMA until they are
-    removed, use:
-
-    import warnings
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARMA',
-                            FutureWarning)
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARIMA',
-                            FutureWarning)
-
-      warnings.warn(ARIMA_DEPRECATION_WARN, FutureWarning)
-    /opt/anaconda3/lib/python3.8/site-packages/statsmodels/tsa/arima_model.py:472: FutureWarning:
-    statsmodels.tsa.arima_model.ARMA and statsmodels.tsa.arima_model.ARIMA have
-    been deprecated in favor of statsmodels.tsa.arima.model.ARIMA (note the .
-    between arima and model) and
-    statsmodels.tsa.SARIMAX. These will be removed after the 0.12 release.
-
-    statsmodels.tsa.arima.model.ARIMA makes use of the statespace framework and
-    is both well tested and maintained.
-
-    To silence this warning and continue using ARMA and ARIMA until they are
-    removed, use:
-
-    import warnings
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARMA',
-                            FutureWarning)
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARIMA',
-                            FutureWarning)
-
-      warnings.warn(ARIMA_DEPRECATION_WARN, FutureWarning)
-    /opt/anaconda3/lib/python3.8/site-packages/statsmodels/tsa/arima_model.py:472: FutureWarning:
-    statsmodels.tsa.arima_model.ARMA and statsmodels.tsa.arima_model.ARIMA have
-    been deprecated in favor of statsmodels.tsa.arima.model.ARIMA (note the .
-    between arima and model) and
-    statsmodels.tsa.SARIMAX. These will be removed after the 0.12 release.
-
-    statsmodels.tsa.arima.model.ARIMA makes use of the statespace framework and
-    is both well tested and maintained.
-
-    To silence this warning and continue using ARMA and ARIMA until they are
-    removed, use:
-
-    import warnings
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARMA',
-                            FutureWarning)
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARIMA',
-                            FutureWarning)
-
-      warnings.warn(ARIMA_DEPRECATION_WARN, FutureWarning)
-    /opt/anaconda3/lib/python3.8/site-packages/statsmodels/tsa/arima_model.py:472: FutureWarning:
-    statsmodels.tsa.arima_model.ARMA and statsmodels.tsa.arima_model.ARIMA have
-    been deprecated in favor of statsmodels.tsa.arima.model.ARIMA (note the .
-    between arima and model) and
-    statsmodels.tsa.SARIMAX. These will be removed after the 0.12 release.
-
-    statsmodels.tsa.arima.model.ARIMA makes use of the statespace framework and
-    is both well tested and maintained.
-
-    To silence this warning and continue using ARMA and ARIMA until they are
-    removed, use:
-
-    import warnings
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARMA',
-                            FutureWarning)
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARIMA',
-                            FutureWarning)
-
-      warnings.warn(ARIMA_DEPRECATION_WARN, FutureWarning)
-    /opt/anaconda3/lib/python3.8/site-packages/statsmodels/tsa/arima_model.py:472: FutureWarning:
-    statsmodels.tsa.arima_model.ARMA and statsmodels.tsa.arima_model.ARIMA have
-    been deprecated in favor of statsmodels.tsa.arima.model.ARIMA (note the .
-    between arima and model) and
-    statsmodels.tsa.SARIMAX. These will be removed after the 0.12 release.
-
-    statsmodels.tsa.arima.model.ARIMA makes use of the statespace framework and
-    is both well tested and maintained.
-
-    To silence this warning and continue using ARMA and ARIMA until they are
-    removed, use:
-
-    import warnings
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARMA',
-                            FutureWarning)
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARIMA',
-                            FutureWarning)
-
-      warnings.warn(ARIMA_DEPRECATION_WARN, FutureWarning)
-    /opt/anaconda3/lib/python3.8/site-packages/statsmodels/tsa/arima_model.py:472: FutureWarning:
-    statsmodels.tsa.arima_model.ARMA and statsmodels.tsa.arima_model.ARIMA have
-    been deprecated in favor of statsmodels.tsa.arima.model.ARIMA (note the .
-    between arima and model) and
-    statsmodels.tsa.SARIMAX. These will be removed after the 0.12 release.
-
-    statsmodels.tsa.arima.model.ARIMA makes use of the statespace framework and
-    is both well tested and maintained.
-
-    To silence this warning and continue using ARMA and ARIMA until they are
-    removed, use:
-
-    import warnings
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARMA',
-                            FutureWarning)
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARIMA',
-                            FutureWarning)
-
-      warnings.warn(ARIMA_DEPRECATION_WARN, FutureWarning)
-    /opt/anaconda3/lib/python3.8/site-packages/statsmodels/tsa/arima_model.py:472: FutureWarning:
-    statsmodels.tsa.arima_model.ARMA and statsmodels.tsa.arima_model.ARIMA have
-    been deprecated in favor of statsmodels.tsa.arima.model.ARIMA (note the .
-    between arima and model) and
-    statsmodels.tsa.SARIMAX. These will be removed after the 0.12 release.
-
-    statsmodels.tsa.arima.model.ARIMA makes use of the statespace framework and
-    is both well tested and maintained.
-
-    To silence this warning and continue using ARMA and ARIMA until they are
-    removed, use:
-
-    import warnings
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARMA',
-                            FutureWarning)
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARIMA',
-                            FutureWarning)
-
-      warnings.warn(ARIMA_DEPRECATION_WARN, FutureWarning)
-    /opt/anaconda3/lib/python3.8/site-packages/statsmodels/tsa/arima_model.py:472: FutureWarning:
-    statsmodels.tsa.arima_model.ARMA and statsmodels.tsa.arima_model.ARIMA have
-    been deprecated in favor of statsmodels.tsa.arima.model.ARIMA (note the .
-    between arima and model) and
-    statsmodels.tsa.SARIMAX. These will be removed after the 0.12 release.
-
-    statsmodels.tsa.arima.model.ARIMA makes use of the statespace framework and
-    is both well tested and maintained.
-
-    To silence this warning and continue using ARMA and ARIMA until they are
-    removed, use:
-
-    import warnings
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARMA',
-                            FutureWarning)
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARIMA',
-                            FutureWarning)
-
-      warnings.warn(ARIMA_DEPRECATION_WARN, FutureWarning)
-    /opt/anaconda3/lib/python3.8/site-packages/statsmodels/tsa/tsatools.py:701: RuntimeWarning: overflow encountered in exp
-      newparams = ((1-np.exp(-params))/(1+np.exp(-params))).copy()
-    /opt/anaconda3/lib/python3.8/site-packages/statsmodels/tsa/tsatools.py:701: RuntimeWarning: invalid value encountered in true_divide
-      newparams = ((1-np.exp(-params))/(1+np.exp(-params))).copy()
-    /opt/anaconda3/lib/python3.8/site-packages/statsmodels/tsa/tsatools.py:702: RuntimeWarning: overflow encountered in exp
-      tmp = ((1-np.exp(-params))/(1+np.exp(-params))).copy()
-    /opt/anaconda3/lib/python3.8/site-packages/statsmodels/tsa/tsatools.py:702: RuntimeWarning: invalid value encountered in true_divide
-      tmp = ((1-np.exp(-params))/(1+np.exp(-params))).copy()
-    /opt/anaconda3/lib/python3.8/site-packages/statsmodels/tsa/arima_model.py:472: FutureWarning:
-    statsmodels.tsa.arima_model.ARMA and statsmodels.tsa.arima_model.ARIMA have
-    been deprecated in favor of statsmodels.tsa.arima.model.ARIMA (note the .
-    between arima and model) and
-    statsmodels.tsa.SARIMAX. These will be removed after the 0.12 release.
-
-    statsmodels.tsa.arima.model.ARIMA makes use of the statespace framework and
-    is both well tested and maintained.
-
-    To silence this warning and continue using ARMA and ARIMA until they are
-    removed, use:
-
-    import warnings
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARMA',
-                            FutureWarning)
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARIMA',
-                            FutureWarning)
-
-      warnings.warn(ARIMA_DEPRECATION_WARN, FutureWarning)
-    /opt/anaconda3/lib/python3.8/site-packages/statsmodels/base/model.py:547: HessianInversionWarning: Inverting hessian failed, no bse or cov_params available
-      warnings.warn('Inverting hessian failed, no bse or cov_params '
-    /opt/anaconda3/lib/python3.8/site-packages/statsmodels/tsa/arima_model.py:472: FutureWarning:
-    statsmodels.tsa.arima_model.ARMA and statsmodels.tsa.arima_model.ARIMA have
-    been deprecated in favor of statsmodels.tsa.arima.model.ARIMA (note the .
-    between arima and model) and
-    statsmodels.tsa.SARIMAX. These will be removed after the 0.12 release.
-
-    statsmodels.tsa.arima.model.ARIMA makes use of the statespace framework and
-    is both well tested and maintained.
-
-    To silence this warning and continue using ARMA and ARIMA until they are
-    removed, use:
-
-    import warnings
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARMA',
-                            FutureWarning)
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARIMA',
-                            FutureWarning)
-
-      warnings.warn(ARIMA_DEPRECATION_WARN, FutureWarning)
-
 
     trend AIC (1, 0)
     trend BIC (1, 0)
 
 
-    /opt/anaconda3/lib/python3.8/site-packages/statsmodels/tsa/arima_model.py:472: FutureWarning:
-    statsmodels.tsa.arima_model.ARMA and statsmodels.tsa.arima_model.ARIMA have
-    been deprecated in favor of statsmodels.tsa.arima.model.ARIMA (note the .
-    between arima and model) and
-    statsmodels.tsa.SARIMAX. These will be removed after the 0.12 release.
-
-    statsmodels.tsa.arima.model.ARIMA makes use of the statespace framework and
-    is both well tested and maintained.
-
-    To silence this warning and continue using ARMA and ARIMA until they are
-    removed, use:
-
-    import warnings
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARMA',
-                            FutureWarning)
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARIMA',
-                            FutureWarning)
-
-      warnings.warn(ARIMA_DEPRECATION_WARN, FutureWarning)
-    /opt/anaconda3/lib/python3.8/site-packages/statsmodels/tsa/arima_model.py:472: FutureWarning:
-    statsmodels.tsa.arima_model.ARMA and statsmodels.tsa.arima_model.ARIMA have
-    been deprecated in favor of statsmodels.tsa.arima.model.ARIMA (note the .
-    between arima and model) and
-    statsmodels.tsa.SARIMAX. These will be removed after the 0.12 release.
-
-    statsmodels.tsa.arima.model.ARIMA makes use of the statespace framework and
-    is both well tested and maintained.
-
-    To silence this warning and continue using ARMA and ARIMA until they are
-    removed, use:
-
-    import warnings
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARMA',
-                            FutureWarning)
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARIMA',
-                            FutureWarning)
-
-      warnings.warn(ARIMA_DEPRECATION_WARN, FutureWarning)
-    /opt/anaconda3/lib/python3.8/site-packages/statsmodels/tsa/arima_model.py:472: FutureWarning:
-    statsmodels.tsa.arima_model.ARMA and statsmodels.tsa.arima_model.ARIMA have
-    been deprecated in favor of statsmodels.tsa.arima.model.ARIMA (note the .
-    between arima and model) and
-    statsmodels.tsa.SARIMAX. These will be removed after the 0.12 release.
-
-    statsmodels.tsa.arima.model.ARIMA makes use of the statespace framework and
-    is both well tested and maintained.
-
-    To silence this warning and continue using ARMA and ARIMA until they are
-    removed, use:
-
-    import warnings
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARMA',
-                            FutureWarning)
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARIMA',
-                            FutureWarning)
-
-      warnings.warn(ARIMA_DEPRECATION_WARN, FutureWarning)
-    /opt/anaconda3/lib/python3.8/site-packages/statsmodels/tsa/arima_model.py:472: FutureWarning:
-    statsmodels.tsa.arima_model.ARMA and statsmodels.tsa.arima_model.ARIMA have
-    been deprecated in favor of statsmodels.tsa.arima.model.ARIMA (note the .
-    between arima and model) and
-    statsmodels.tsa.SARIMAX. These will be removed after the 0.12 release.
-
-    statsmodels.tsa.arima.model.ARIMA makes use of the statespace framework and
-    is both well tested and maintained.
-
-    To silence this warning and continue using ARMA and ARIMA until they are
-    removed, use:
-
-    import warnings
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARMA',
-                            FutureWarning)
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARIMA',
-                            FutureWarning)
-
-      warnings.warn(ARIMA_DEPRECATION_WARN, FutureWarning)
-    /opt/anaconda3/lib/python3.8/site-packages/statsmodels/base/model.py:547: HessianInversionWarning: Inverting hessian failed, no bse or cov_params available
-      warnings.warn('Inverting hessian failed, no bse or cov_params '
-    /opt/anaconda3/lib/python3.8/site-packages/statsmodels/tsa/arima_model.py:472: FutureWarning:
-    statsmodels.tsa.arima_model.ARMA and statsmodels.tsa.arima_model.ARIMA have
-    been deprecated in favor of statsmodels.tsa.arima.model.ARIMA (note the .
-    between arima and model) and
-    statsmodels.tsa.SARIMAX. These will be removed after the 0.12 release.
-
-    statsmodels.tsa.arima.model.ARIMA makes use of the statespace framework and
-    is both well tested and maintained.
-
-    To silence this warning and continue using ARMA and ARIMA until they are
-    removed, use:
-
-    import warnings
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARMA',
-                            FutureWarning)
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARIMA',
-                            FutureWarning)
-
-      warnings.warn(ARIMA_DEPRECATION_WARN, FutureWarning)
-    /opt/anaconda3/lib/python3.8/site-packages/statsmodels/tsa/arima_model.py:472: FutureWarning:
-    statsmodels.tsa.arima_model.ARMA and statsmodels.tsa.arima_model.ARIMA have
-    been deprecated in favor of statsmodels.tsa.arima.model.ARIMA (note the .
-    between arima and model) and
-    statsmodels.tsa.SARIMAX. These will be removed after the 0.12 release.
-
-    statsmodels.tsa.arima.model.ARIMA makes use of the statespace framework and
-    is both well tested and maintained.
-
-    To silence this warning and continue using ARMA and ARIMA until they are
-    removed, use:
-
-    import warnings
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARMA',
-                            FutureWarning)
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARIMA',
-                            FutureWarning)
-
-      warnings.warn(ARIMA_DEPRECATION_WARN, FutureWarning)
-    /opt/anaconda3/lib/python3.8/site-packages/statsmodels/tsa/arima_model.py:472: FutureWarning:
-    statsmodels.tsa.arima_model.ARMA and statsmodels.tsa.arima_model.ARIMA have
-    been deprecated in favor of statsmodels.tsa.arima.model.ARIMA (note the .
-    between arima and model) and
-    statsmodels.tsa.SARIMAX. These will be removed after the 0.12 release.
-
-    statsmodels.tsa.arima.model.ARIMA makes use of the statespace framework and
-    is both well tested and maintained.
-
-    To silence this warning and continue using ARMA and ARIMA until they are
-    removed, use:
-
-    import warnings
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARMA',
-                            FutureWarning)
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARIMA',
-                            FutureWarning)
-
-      warnings.warn(ARIMA_DEPRECATION_WARN, FutureWarning)
-    /opt/anaconda3/lib/python3.8/site-packages/statsmodels/tsa/arima_model.py:472: FutureWarning:
-    statsmodels.tsa.arima_model.ARMA and statsmodels.tsa.arima_model.ARIMA have
-    been deprecated in favor of statsmodels.tsa.arima.model.ARIMA (note the .
-    between arima and model) and
-    statsmodels.tsa.SARIMAX. These will be removed after the 0.12 release.
-
-    statsmodels.tsa.arima.model.ARIMA makes use of the statespace framework and
-    is both well tested and maintained.
-
-    To silence this warning and continue using ARMA and ARIMA until they are
-    removed, use:
-
-    import warnings
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARMA',
-                            FutureWarning)
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARIMA',
-                            FutureWarning)
-
-      warnings.warn(ARIMA_DEPRECATION_WARN, FutureWarning)
-    /opt/anaconda3/lib/python3.8/site-packages/statsmodels/tsa/arima_model.py:472: FutureWarning:
-    statsmodels.tsa.arima_model.ARMA and statsmodels.tsa.arima_model.ARIMA have
-    been deprecated in favor of statsmodels.tsa.arima.model.ARIMA (note the .
-    between arima and model) and
-    statsmodels.tsa.SARIMAX. These will be removed after the 0.12 release.
-
-    statsmodels.tsa.arima.model.ARIMA makes use of the statespace framework and
-    is both well tested and maintained.
-
-    To silence this warning and continue using ARMA and ARIMA until they are
-    removed, use:
-
-    import warnings
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARMA',
-                            FutureWarning)
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARIMA',
-                            FutureWarning)
-
-      warnings.warn(ARIMA_DEPRECATION_WARN, FutureWarning)
-    /opt/anaconda3/lib/python3.8/site-packages/statsmodels/tsa/arima_model.py:472: FutureWarning:
-    statsmodels.tsa.arima_model.ARMA and statsmodels.tsa.arima_model.ARIMA have
-    been deprecated in favor of statsmodels.tsa.arima.model.ARIMA (note the .
-    between arima and model) and
-    statsmodels.tsa.SARIMAX. These will be removed after the 0.12 release.
-
-    statsmodels.tsa.arima.model.ARIMA makes use of the statespace framework and
-    is both well tested and maintained.
-
-    To silence this warning and continue using ARMA and ARIMA until they are
-    removed, use:
-
-    import warnings
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARMA',
-                            FutureWarning)
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARIMA',
-                            FutureWarning)
-
-      warnings.warn(ARIMA_DEPRECATION_WARN, FutureWarning)
-    /opt/anaconda3/lib/python3.8/site-packages/statsmodels/tsa/arima_model.py:472: FutureWarning:
-    statsmodels.tsa.arima_model.ARMA and statsmodels.tsa.arima_model.ARIMA have
-    been deprecated in favor of statsmodels.tsa.arima.model.ARIMA (note the .
-    between arima and model) and
-    statsmodels.tsa.SARIMAX. These will be removed after the 0.12 release.
-
-    statsmodels.tsa.arima.model.ARIMA makes use of the statespace framework and
-    is both well tested and maintained.
-
-    To silence this warning and continue using ARMA and ARIMA until they are
-    removed, use:
-
-    import warnings
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARMA',
-                            FutureWarning)
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARIMA',
-                            FutureWarning)
-
-      warnings.warn(ARIMA_DEPRECATION_WARN, FutureWarning)
-    /opt/anaconda3/lib/python3.8/site-packages/statsmodels/tsa/arima_model.py:472: FutureWarning:
-    statsmodels.tsa.arima_model.ARMA and statsmodels.tsa.arima_model.ARIMA have
-    been deprecated in favor of statsmodels.tsa.arima.model.ARIMA (note the .
-    between arima and model) and
-    statsmodels.tsa.SARIMAX. These will be removed after the 0.12 release.
-
-    statsmodels.tsa.arima.model.ARIMA makes use of the statespace framework and
-    is both well tested and maintained.
-
-    To silence this warning and continue using ARMA and ARIMA until they are
-    removed, use:
-
-    import warnings
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARMA',
-                            FutureWarning)
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARIMA',
-                            FutureWarning)
-
-      warnings.warn(ARIMA_DEPRECATION_WARN, FutureWarning)
-    /opt/anaconda3/lib/python3.8/site-packages/statsmodels/tsa/arima_model.py:472: FutureWarning:
-    statsmodels.tsa.arima_model.ARMA and statsmodels.tsa.arima_model.ARIMA have
-    been deprecated in favor of statsmodels.tsa.arima.model.ARIMA (note the .
-    between arima and model) and
-    statsmodels.tsa.SARIMAX. These will be removed after the 0.12 release.
-
-    statsmodels.tsa.arima.model.ARIMA makes use of the statespace framework and
-    is both well tested and maintained.
-
-    To silence this warning and continue using ARMA and ARIMA until they are
-    removed, use:
-
-    import warnings
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARMA',
-                            FutureWarning)
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARIMA',
-                            FutureWarning)
-
-      warnings.warn(ARIMA_DEPRECATION_WARN, FutureWarning)
-    /opt/anaconda3/lib/python3.8/site-packages/statsmodels/tsa/arima_model.py:472: FutureWarning:
-    statsmodels.tsa.arima_model.ARMA and statsmodels.tsa.arima_model.ARIMA have
-    been deprecated in favor of statsmodels.tsa.arima.model.ARIMA (note the .
-    between arima and model) and
-    statsmodels.tsa.SARIMAX. These will be removed after the 0.12 release.
-
-    statsmodels.tsa.arima.model.ARIMA makes use of the statespace framework and
-    is both well tested and maintained.
-
-    To silence this warning and continue using ARMA and ARIMA until they are
-    removed, use:
-
-    import warnings
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARMA',
-                            FutureWarning)
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARIMA',
-                            FutureWarning)
-
-      warnings.warn(ARIMA_DEPRECATION_WARN, FutureWarning)
-    /opt/anaconda3/lib/python3.8/site-packages/statsmodels/tsa/arima_model.py:472: FutureWarning:
-    statsmodels.tsa.arima_model.ARMA and statsmodels.tsa.arima_model.ARIMA have
-    been deprecated in favor of statsmodels.tsa.arima.model.ARIMA (note the .
-    between arima and model) and
-    statsmodels.tsa.SARIMAX. These will be removed after the 0.12 release.
-
-    statsmodels.tsa.arima.model.ARIMA makes use of the statespace framework and
-    is both well tested and maintained.
-
-    To silence this warning and continue using ARMA and ARIMA until they are
-    removed, use:
-
-    import warnings
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARMA',
-                            FutureWarning)
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARIMA',
-                            FutureWarning)
-
-      warnings.warn(ARIMA_DEPRECATION_WARN, FutureWarning)
-
-
     residual AIC (2, 1)
     residual AIC (2, 1)
 
 
-    /opt/anaconda3/lib/python3.8/site-packages/statsmodels/base/model.py:547: HessianInversionWarning: Inverting hessian failed, no bse or cov_params available
-      warnings.warn('Inverting hessian failed, no bse or cov_params '
 
 
 
@@ -878,30 +254,7 @@ resid_fit_seq = resid_model.fittedvalues
 resid_pred_seq = resid_model.predict(start = '2014-08-01',end = '2014-08-10',dynamic = True)
 ```
 
-    /opt/anaconda3/lib/python3.8/site-packages/statsmodels/tsa/arima_model.py:472: FutureWarning:
-    statsmodels.tsa.arima_model.ARMA and statsmodels.tsa.arima_model.ARIMA have
-    been deprecated in favor of statsmodels.tsa.arima.model.ARIMA (note the .
-    between arima and model) and
-    statsmodels.tsa.SARIMAX. These will be removed after the 0.12 release.
-
-    statsmodels.tsa.arima.model.ARIMA makes use of the statespace framework and
-    is both well tested and maintained.
-
-    To silence this warning and continue using ARMA and ARIMA until they are
-    removed, use:
-
-    import warnings
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARMA',
-                            FutureWarning)
-    warnings.filterwarnings('ignore', 'statsmodels.tsa.arima_model.ARIMA',
-                            FutureWarning)
-
-      warnings.warn(ARIMA_DEPRECATION_WARN, FutureWarning)
-    /opt/anaconda3/lib/python3.8/site-packages/statsmodels/tsa/base/tsa_model.py:524: ValueWarning: No frequency information was provided, so inferred frequency D will be used.
-      warnings.warn('No frequency information was'
-    /opt/anaconda3/lib/python3.8/site-packages/statsmodels/base/model.py:547: HessianInversionWarning: Inverting hessian failed, no bse or cov_params available
-      warnings.warn('Inverting hessian failed, no bse or cov_params '
-
+# 8 .  Model Fitting
 
 
 ```python
@@ -938,7 +291,7 @@ pred_seq = pred_seq.add(trend_pred_seq,fill_value = 0)
     <ipython-input-44-02d92dd51741>:17: FutureWarning: The pandas.datetime class is deprecated and will be removed from pandas in a future version. Import from datetime module instead.
       '2014-08-09', '2014-08-10']).apply(lambda dates: pd.datetime.strptime(dates, '%Y-%m-%d'))
 
-
+#9. Measure Performance
 
 ```python
 #chunk5: Measure Performance
@@ -983,10 +336,3 @@ mean_absolute_scaled_error(test_seq,pred_seq,train_seq)
 
 
     3.5125341730575683
-
-
-
-
-```python
-
-```
