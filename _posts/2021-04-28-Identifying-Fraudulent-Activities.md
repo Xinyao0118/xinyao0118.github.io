@@ -3,7 +3,7 @@ layout:     post
 title:      Identify Fraudulent activities 	
 subtitle:   Use Ranfom Forest to detect fraudulent activities for E-commerce websites.
 date:       2021-04-28 	
-author:     (Mia) Xinyao Wu
+author:     Xinyao Wu
 header-img: img/post-bg-ios9-web.jpg
 catalog: true
 tags:
@@ -380,7 +380,7 @@ plt.show()
 <img src="/img/output_13_0.png"/>
 
 
-
+# 5. Conclusion
 
 The Test AUC score is 0.85. \
 Normally for test AUC score 0.7 to 0.8 is considered acceptable, 0.8 to 0.9 is considered excellent.
