@@ -170,7 +170,7 @@ decompose(train_seq)
 
 <img src="/img/output_6_0.png"/>
 
-# 5. recheck stationary after decomposition
+# 5. Recheck stationary after decomposition
 ```python
 decomposition = seasonal_decompose(train_seq)
 trend = decomposition.trend
@@ -217,7 +217,7 @@ autocorrelation(residual, 20)
 
 <img src="/img/output_8_1.png"/>
 
-# 6. model delection
+# 6. Model delection
 
 ```python
 #chunk5: AIC, BIC for model selection
