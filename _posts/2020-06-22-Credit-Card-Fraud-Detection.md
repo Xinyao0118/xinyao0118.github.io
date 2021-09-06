@@ -12,7 +12,8 @@ tags:
     - 函数式编程
     - 开源框架
 ---
-# Goal: Identify unusual/weird events that have a high chance of being a fraud with credit card transactions.
+# Goal:
+Identify unusual/weird events that have a high chance of being a fraud with credit card transactions.
 
 ```python
 import pandas as pd
@@ -21,9 +22,15 @@ from sklearn.cluster import KMeans
 
 ```
 
+#  1: Customer incentive policy
+## 1-1. Aim
+Enlarge money flow by automatically increasing their limit
+## 1-2. Method
+Identify target users that never went above the monthly credit card limit (calendar month).
+
 
 ```python
-#  Task1: Identify those users that never went above the monthly credit card limit (calendar month).
+
 
 general_info = pd.read_csv('./cc_info.csv')
 transaction = pd.read_csv('./transactions.csv',parse_dates=['date'])
@@ -75,9 +82,13 @@ print(task1)
     [3571 rows x 4 columns]
 
 
+# 2 : Increase retention
+## 2-1. Aim:
+Decrease the punishment by setting a remind for users to pay their bills.
+## 2-2. Method:
+Build a function that for each day, returns a list of users who went above their credit card monthly limit on that day
 
 ```python
-## Task2 : Build a function that for each day, returns a list of users who went above their credit card monthly limit on that day
 
 def credit_alarm(date):
     month = date.month
@@ -87,7 +98,7 @@ def credit_alarm(date):
     users = task2.loc[(task2['month'] == month) & (task2['transaction_dollar_amount']>task2['credit_card_limit'])]['credit_card']
     return users.unique()
 
-
+# test with example: 2015-10-29 18:23:04
 date = pd.to_datetime(['2015-10-29 18:23:04'])
 credit_alarm(date[0])
 ```
@@ -127,9 +138,16 @@ credit_alarm(date[0])
 
 
 
+# 3:  Fraud Detection
+## 3-1: Aim
+detect all transactions that seem unusual and are worth being investigated further
+## 3-2: Method
+implement an unsupervised algorithm (PCA + K-Means)
+
+# Feature Engineering + PCA + Building Model
 
 ```python
-# Task3:  implement an unsupervised algorithm that returns all transactions that seem unusual and are worth being investigated further.
+
 
 ### 1. transform register zip code to [longitude,latitude]
 
@@ -234,7 +252,7 @@ plt.scatter(x3d['pc1'], x3d['pc2'], x3d['pc3'],marker='o')
 
 
 
-
+# Tuning Hyperparameter
 
 ```python
 #hyperparameter k selection
@@ -316,7 +334,7 @@ x3d.label.value_counts()
     Name: label, dtype: int64
 
 
-
+# Comparing the distribution of two core features among classified two clusters
 
 ```python
 
@@ -348,15 +366,16 @@ plt.hist(unsuspect.loc[:,['distance']].values,bins=50,density = True,label = 'un
 plt.legend(loc='best')
 plt.show()
 
-### Conclusion: Distance is the core factor for detecting the frauds.
-```
 
+```
 
 
 <img src="/img/output_777_0.png"/>
 <img src="/img/output_777_1.png"/>
 <img src="/img/output_7_2.png"/>
 
+
+# quantify the effect of fraud transactions
 ```python
 #ratio of suspectious fraud transactions
 suspect.shape[0]/credit_df.shape[0]*100
@@ -366,8 +385,6 @@ suspect.shape[0]/credit_df.shape[0]*100
 
 
 1.8483441280703898
-
-
 
 
 
@@ -383,8 +400,8 @@ suspect['transaction_dollar_amount'].sum()
 
 
 
-#tests
-
+# non-parametric & parametric tests
+Aim: check whether the mean of suspect and non-suspect team is different.
 
 ```python
 
