@@ -7,10 +7,11 @@ author:     Xinyao Wu
 header-img: img/post-bg-rwd.jpg
 catalog: true
 tags:
-    - iOS
-    - ReactiveCocoa
-    - 函数式编程
-    - 开源框架
+    - E-Commerce
+    - Unsupervised Learning - Clustering
+    - Machine Learning
+    - K-Means
+    - PCA
 ---
 # Goal:
 Identify unusual/weird events that have a high chance of being a fraud with credit card transactions.

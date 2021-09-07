@@ -1,16 +1,17 @@
 ---
 layout:     post
 title:      Identify Fraudulent Activities 	
-subtitle:   Use Ranfom Forest to detect fraudulent activities for E-commerce websites.
+subtitle:   Use Random Forest to detect fraudulent activities for E-commerce websites.
 date:       2021-04-28 	
 author:     Xinyao Wu
 header-img: img/post-bg-ioses.jpg
 catalog: true
 tags:
-    - iOS
-    - ReactiveCocoa
-    - 函数式编程
-    - 开源框架
+    - E-Commerce
+    - Machine Learning
+    - Random Forest
+    - Supervised Learning
+    - ROC Curve
 ---
 # Goal
 Build a machine learning model that predicts the probability that the first transaction of a new user is fraudulent.
