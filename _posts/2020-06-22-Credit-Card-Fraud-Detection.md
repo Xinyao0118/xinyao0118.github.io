@@ -4,7 +4,7 @@ title:      Credit Card Fraud Detection
 subtitle:   Use K-Means clustering to detect irregular credit card transaction.
 date:       2020-06-22 	
 author:     Xinyao Wu
-header-img: img/post-bg-ios9-web.jpg
+header-img: img/post-bg-rwd.jpg
 catalog: true
 tags:
     - iOS
