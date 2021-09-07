@@ -9,6 +9,7 @@ catalog: true
 tags:
     - Social App
     - Deep Learning
+    - NLP
     - LSTM
     - GRU
     - RNN
