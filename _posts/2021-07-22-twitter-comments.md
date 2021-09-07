@@ -13,7 +13,11 @@ tags:
     - LSTM
     - GRU
     - RNN
+    - AI
 ---
+
+#Goal:
+Use TPUs to identify toxicity comments across multiple languages.
 
 ```python
 import numpy as np
