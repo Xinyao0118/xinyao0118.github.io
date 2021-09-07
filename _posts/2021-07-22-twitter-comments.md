@@ -4,7 +4,7 @@ title:      Twitter Hateful Comments Detection
 subtitle:   Utilized NLP, Bi-Directional LSTM to detect hateful comments to maintain Twitter environment.
 date:       2021-07-22
 author:     Xinyao Wu
-header-img: img/post-bg.jpg
+header-img: img/home-bg.jpg
 catalog: true
 tags:
     - E-Commerce
