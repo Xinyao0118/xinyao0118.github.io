@@ -152,13 +152,13 @@ model.fit(xtrain_pad, ytrain,epochs = 5, batch_size = 64*strategy.num_replicas_i
 scores = model.predict(xvalid_pad)
 print("Auc:%.2f" % (roc_auc(scores,yvalid)))
 ```
-
+Auc:0.82
 
 ```python
 scores_model = []
 scores_model.append({'Model':'SimpleRNN','AUC_Score':roc_auc(scores,yvalid)})
 ```
-
+[{'Model': 'SimpleRNN', 'AUC_Score': 0.8221208596590057}]
 
 ```python
 scores_model
@@ -177,6 +177,8 @@ for line in tqdm(f):
 f.close()
 print('Found %s word vectors.' % len(embeddings_index))
 ```
+2196018it [05:18, 6895.53it/s]
+Found 2196017 word vectors.
 
 # 2. LSTM
 
@@ -188,7 +190,7 @@ for word,i in tqdm(word_index.items()):
     if embedding_vector is not None:
         embedding_matrix[i] = embedding_vector
 ```
-
+100%|██████████| 43496/43496 [00:00<00:00, 196129.82it/s]
 
 ```python
 %%time
@@ -206,6 +208,25 @@ with strategy.scope():
 
 model.summary()
 ```
+
+Model: "sequential_1"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+embedding_1 (Embedding)      (None, 1500, 300)         13049100  
+_________________________________________________________________
+lstm (LSTM)                  (None, 100)               160400    
+_________________________________________________________________
+dense_1 (Dense)              (None, 1)                 101       
+=================================================================
+Total params: 13,209,601
+Trainable params: 160,501
+Non-trainable params: 13,049,100
+_________________________________________________________________
+CPU times: user 228 ms, sys: 149 ms, total: 377 ms
+Wall time: 456 ms
+
+
 ## LSTM - Fitting,Predicting, Evaluating
 
 ```python
