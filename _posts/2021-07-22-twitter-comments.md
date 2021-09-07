@@ -232,7 +232,17 @@ Wall time: 456 ms
 ```python
 model.fit(xtrain_pad,ytrain,epochs = 5,batch_size = 64*strategy.num_replicas_in_sync)
 ```
-
+Epoch 1/5
+150/150 [==============================] - 166s 1s/step - loss: 0.2672 - accuracy: 0.9127
+Epoch 2/5
+150/150 [==============================] - 163s 1s/step - loss: 0.1355 - accuracy: 0.9505
+Epoch 3/5
+150/150 [==============================] - 163s 1s/step - loss: 0.1241 - accuracy: 0.9519
+Epoch 4/5
+150/150 [==============================] - 163s 1s/step - loss: 0.1139 - accuracy: 0.9623
+Epoch 5/5
+150/150 [==============================] - 163s 1s/step - loss: 0.1101 - accuracy: 0.9606
+<tensorflow.python.keras.callbacks.History at 0x7fbb936f6210>
 
 ```python
 scores = model.predict(xvalid_pad)
