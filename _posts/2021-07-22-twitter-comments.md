@@ -7,17 +7,12 @@ author:     Xinyao Wu
 header-img: img/home-bg.jpg
 catalog: true
 tags:
-    - E-Commerce
-    - Machine Learning
-    - Random Forest
-    - Supervised Learning
-    - ROC Curve
+    - Social App
+    - Deep Learning
+    - LSTM
+    - GRU
+    - RNN
 ---
-```python
-import numpy as np # linear algebra
-import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
-```
-
 
 ```python
 import numpy as np
@@ -258,7 +253,7 @@ print("Auc: %.2f" % (roc_auc(scores,yvalid)))
 scores_model.append({'Model':'LSTM','AUC_Score':roc_auc(scores,yvalid)})
 ```
 
-# Bi-Directional RNN
+# 4.Bi-Directional RNN
 
 ## Bi-Directional RNN - Training
 ```python
