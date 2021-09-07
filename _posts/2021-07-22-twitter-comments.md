@@ -208,23 +208,7 @@ with strategy.scope():
 
 model.summary()
 ```
-
-Model: "sequential_1"
-_________________________________________________________________
-Layer (type)                 Output Shape              Param #   
-=================================================================
-embedding_1 (Embedding)      (None, 1500, 300)         13049100  
-_________________________________________________________________
-lstm (LSTM)                  (None, 100)               160400    
-_________________________________________________________________
-dense_1 (Dense)              (None, 1)                 101       
-=================================================================
-Total params: 13,209,601
-Trainable params: 160,501
-Non-trainable params: 13,049,100
-_________________________________________________________________
-CPU times: user 228 ms, sys: 149 ms, total: 377 ms
-Wall time: 456 ms
+<img src="/img/tdl3.png"/>
 
 
 ## LSTM - Fitting,Predicting, Evaluating
@@ -232,23 +216,13 @@ Wall time: 456 ms
 ```python
 model.fit(xtrain_pad,ytrain,epochs = 5,batch_size = 64*strategy.num_replicas_in_sync)
 ```
-Epoch 1/5
-150/150 [==============================] - 166s 1s/step - loss: 0.2672 - accuracy: 0.9127
-Epoch 2/5
-150/150 [==============================] - 163s 1s/step - loss: 0.1355 - accuracy: 0.9505
-Epoch 3/5
-150/150 [==============================] - 163s 1s/step - loss: 0.1241 - accuracy: 0.9519
-Epoch 4/5
-150/150 [==============================] - 163s 1s/step - loss: 0.1139 - accuracy: 0.9623
-Epoch 5/5
-150/150 [==============================] - 163s 1s/step - loss: 0.1101 - accuracy: 0.9606
-<tensorflow.python.keras.callbacks.History at 0x7fbb936f6210>
+<img src="/img/tdl4.png"/>
 
 ```python
 scores = model.predict(xvalid_pad)
 print("Auc:%.2f" % (roc_auc(scores,yvalid)))
 ```
-
+Auc:0.97
 
 ```python
 scores_model.append({'Model':'LSTM','AUC_Score':roc_auc(scores,yvalid)})
@@ -274,18 +248,24 @@ with strategy.scope():
 
 model.summary()
 ```
+
+<img src="/img/tdl5.png"/>
+
 ## GRU - Fitting,Predicting, Evaluating
 
 ```python
 model.fit(xtrain_pad,ytrain,epochs = 5, batch_size = 64*strategy.num_replicas_in_sync)
 ```
-
+<img src="/img/tdl6.png"/>
 
 ```python
 scores = model.predict(xvalid_pad)
 print("Auc: %.2f" % (roc_auc(scores,yvalid)))
-scores_model.append({'Model':'LSTM','AUC_Score':roc_auc(scores,yvalid)})
+scores_model.append({'Model':'GRU','AUC_Score':roc_auc(scores,yvalid)})
 ```
+[{'Model': 'SimpleRNN', 'AUC_Score': 0.8221208596590057},
+ {'Model': 'LSTM', 'AUC_Score': 0.9695095015582637},
+ {'Model': 'GRU', 'AUC_Score': 0.9761518790349707}]
 
 # 4.Bi-Directional RNN
 
@@ -306,6 +286,8 @@ with strategy.scope():
 
 model.summary()
 ```
+<img src="/img/tdl7.png"/>
+
 ## Bi-Directional RNN- Fitting,Predicting, Evaluating
 
 ```python
