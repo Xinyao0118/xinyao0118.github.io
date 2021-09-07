@@ -4,7 +4,7 @@ title:      Identify Fraudulent Activities
 subtitle:   Use Ranfom Forest to detect fraudulent activities for E-commerce websites.
 date:       2021-04-28 	
 author:     Xinyao Wu
-header-img: img/post-bg-desk.jpg
+header-img: img/post-bg-ioses.jpg
 catalog: true
 tags:
     - iOS
