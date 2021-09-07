@@ -76,6 +76,7 @@ train.drop(['severe_toxic','obscene','threat','insult','identity_hate'],axis = 1
 train = train.loc[:12000,:]
 train.shape
 ```
+(12001, 3)
 
 1.check the maximum number of words that can be present in a comment, this will help later in padding
 
@@ -83,7 +84,7 @@ train.shape
 ```python
 train['comment_text'].apply(lambda x:len(str(x).split())).max()
 ```
-
+1403
 
 ```python
 def roc_auc(predictions,target):
@@ -139,12 +140,13 @@ with strategy.scope():
     model.compile(loss = 'binary_crossentropy',optimizer='adam',metrics = ['accuracy'])
 model.summary()
 ```
+<img src="/img/tdl1.png"/>
 
 ## Simple RNN - Fitting,Predicting, Evaluating
 ```python
 model.fit(xtrain_pad, ytrain,epochs = 5, batch_size = 64*strategy.num_replicas_in_sync)
 ```
-
+<img src="/img/tdl2.png"/>
 
 ```python
 scores = model.predict(xvalid_pad)
