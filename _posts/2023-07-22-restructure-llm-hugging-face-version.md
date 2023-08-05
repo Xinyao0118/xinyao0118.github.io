@@ -55,6 +55,7 @@ from transformers import AutoTokenizer,AutoModelForMultipleChoice,TrainingArgume
 # Following datacollator (adapted from https://huggingface.co/docs/transformers/tasks/multiple_choice)
 # will dynamically pad our questions at batch-time so we don't have to make every question the length
 # of our longest question.
+
 from dataclasses import dataclass
 from transformers.tokenization_utils_base import PreTrainedTokenizerBase, PaddingStrategy
 from typing import Optional, Union
@@ -92,6 +93,7 @@ class DataCollatorForMultipleChoice:
 
 ```python
 # --- skeleton Requirement: can generate different predictions for different models in Hugging Face.
+
 class LLM_prediction:
 
     def __init__(self,model_path,options = 'ABCDE'):
@@ -187,11 +189,6 @@ llm_test.nlp()
     Some weights of BertForMultipleChoice were not initialized from the model checkpoint at /kaggle/input/huggingface-bert/bert-base-cased and are newly initialized: ['classifier.bias', 'classifier.weight']
     You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
 
-
-
-      0%|          | 0/200 [00:00<?, ?ex/s]
-
-
     /opt/conda/lib/python3.10/site-packages/transformers/optimization.py:411: FutureWarning: This implementation of AdamW is deprecated and will be removed in a future version. Use the PyTorch implementation torch.optim.AdamW instead, or set `no_deprecation_warning=True` to disable this warning
       warnings.warn(
     You're using a BertTokenizerFast tokenizer. Please note that with a fast tokenizer, using the `__call__` method is faster than using a method to encode the text followed by a call to the `pad` method to get a padded encoding.
@@ -251,10 +248,6 @@ llm_test.nlp()
 ```python
 res = llm_test.inference()
 ```
-
-
-      0%|          | 0/200 [00:00<?, ?ex/s]
-
 
     Asking to truncate to max_length but no maximum length is provided and the model has no predefined maximum length. Default to no truncation.
     /opt/conda/lib/python3.10/site-packages/torch/nn/parallel/_functions.py:68: UserWarning: Was asked to gather along dimension 0, but all input tensors were scalars; will instead unsqueeze and return a vector.
